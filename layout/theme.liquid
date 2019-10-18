@@ -1,0 +1,109 @@
+<!doctype html>
+<html class="no-js supports-no-cookies" lang="{{ shop.locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta name="theme-color" content="{{ settings.color_accent }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {%- endif -%}
+
+  {%- capture seo_title -%}
+    {{ page_title }}
+    {%- if current_tags -%}
+      {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+    {%- endif -%}
+    {%- if current_page != 1 -%}
+      &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {%- endif -%}
+    {%- assign escaped_page_title = page_title | escape -%}
+    {%- unless escaped_page_title contains shop.name -%}
+      &ndash; {{ shop.name }}
+    {%- endunless -%}
+  {%- endcapture -%}
+  <title>{{ seo_title | strip }}</title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  <style>html {animation: fadein 1.5s;}@keyframes fadein {from { opacity: 0;}to { opacity: 1;}}</style>
+  
+    <!--     Fonts and icons     -->
+    <div class="lazyload" data-link="https://fonts.googleapis.com/css?family=Montserrat:400,700,200">
+    <div class="lazyload" data-link="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <!-- CSS Files -->
+    {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
+    {{ 'paper-kit.css' | asset_url | stylesheet_tag }}
+    <div class="lazyload" data-link="{{ 'rotating-card.css' | asset_url }}">
+
+  {% include 'social-meta-tags' %}
+  {% include 'css-variables' %}
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', '');
+
+    window.theme = {
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }}
+      },
+      moneyFormat: {{ shop.money_format | json }}
+    };
+  </script>
+  
+  {{ content_for_header }}
+</head>
+
+<body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
+  
+<!--    navbar come here          -->
+{% section 'header' %}
+<!-- end navbar  -->
+
+<div class="wrapper">
+  <style>
+    #shopify-section-featured-product, #shopify-section-1571292031811, #shopify-section-1571329432522 {display: inline-block;}
+  </style>
+
+    <!-- content come here     -->
+  <!--<main role="main" id="MainContent">-->
+  <div class="section section-buttons section-gray">
+    <div class="container" align="center">
+    {{ content_for_layout }}
+    </div>
+  </div>
+  <!--</main>-->
+</div>
+
+<!-- Modal Bodies come here -->
+
+<!--   end modal -->
+
+  <a style="visibility: hidden; display: none;" class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+  {% section 'footer' %}
+
+</body>
+<!--   Core JS Files   -->
+{{ 'jquery.min.js' | asset_url | script_tag }}
+{{ 'popper.min.js' | asset_url | script_tag }}
+{{ 'bootstrap.min.js' | asset_url | script_tag }}
+
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+{{ 'bootstrap-switch.js' | asset_url | script_tag }}
+
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+{{ 'nouislider.min.js' | asset_url | script_tag }}
+
+<!-- Control Center for Paper Kit: parallax effects, scripts for the example pages etc -->
+{{ 'paper-kit.min.js' | asset_url | script_tag }}
+  
+<!-- Lazy Loading -->
+{{ 'lazysizes.min.js' | asset_url | script_tag }} 
+<style>.lazyload,.lazyloading{opacity:0}.lazyloaded{opacity:1;transition:opacity .3s}</style>
+</html>

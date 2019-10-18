@@ -1,0 +1,106 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available when you add the "Image with text" section in the theme editor.
+
+  Theme Store required settings
+  - Image
+  - Heading: title of the block
+  - Text: description of the block
+
+  Theme Store optional settings
+  - Button label: label associated with the button
+  - Button link: link of the button
+{%- endcomment -%}
+
+<section class="image-with-text">
+  <div class="section section-image lazyload" data-bg="{{ section.settings.image | img_url: '1000x', format: 'pjpg' }}">
+    <div class="col-lg-4 col-md-6 mx-auto">
+      <div class="container card-container">
+        <div class="card card-register">
+          <div class="front">
+              <div class="content">
+                <div class="card" style="box-shadow:none;">
+                  <div class="main">
+                    {% if section.settings.title != blank %}<h3 class="name title mx-auto">{{ section.settings.title | escape }}</h3>{% endif %}
+                    <img class="img-thumbnail lazyload" data-src="{{ section.settings.front_image | img_url: '300x', format: 'pjpg' }}">
+                    {% if section.settings.text != blank %}<p class="text-center">{{ section.settings.text }}</p>{% endif %}
+                  </div>
+                </div>
+              </div>
+           </div>
+           <div class="back">
+             <div class="content">
+           <div class="main">
+           {% if section.settings.subtitle != blank %}<h3 class="name title mx-auto">{{ section.settings.subtitle | escape }}</h3>{% endif %}
+           <img class="img-thumbnail lazyload" data-src="{{ section.settings.back_image | img_url: '300x', format: 'pjpg' }}">
+           {% if section.settings.card_back != blank %}<p class="text-center">{{ section.settings.card_back }}</p>{% endif %}
+         </div>
+   </div>
+  </div>
+ </div>
+</div>
+</div></div>
+</section>
+
+{% schema %}
+  {
+    "name": "Image with card flip",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image with text"
+      },
+      {
+        "type": "image_picker",
+        "id": "front_image",
+        "label": "Front image"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+      },
+	  {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subheading",
+        "default": "Card back"
+      },
+      {
+        "type": "image_picker",
+        "id": "back_image",
+        "label": "Back image"
+      },
+	  {
+        "type": "richtext",
+        "id": "card_back",
+        "label": "Card back",
+        "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image with card flip",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

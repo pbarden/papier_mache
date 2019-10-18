@@ -1,0 +1,66 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available when you add "Rich text" section on the Theme Editor.
+
+  Theme Store required settings
+  - Heading: title of the rich text section
+  - Text: description of the rich text section
+{%- endcomment -%}
+
+<div class="card card-nav-tabs" style="margin: 20px;">
+  <div class="card-header card-header-warning">
+    {%- if section.settings.title != blank -%}
+      <h2>{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0 card-text">
+      {%- if section.settings.text != blank -%}
+        {{ section.settings.text }}
+      {%- endif -%}
+    </blockquote>
+     <div class="col text-center" style="margin-top: 15px;">
+       {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+              <a href="{{ section.settings.button_link }}" class="btn btn-outline-primary btn-round btn-lg" target="_blank">{{ section.settings.button_label | escape }}</a>
+	   {% endif %}
+     </div>
+  </div>
+</div>
+
+<section>
+
+</section>
+
+{% schema %}
+  {
+    "name": "Text with link",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Talk about your brand"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ],
+    "presets": [{
+        "name": "Text with link",
+        "category": "Text"
+    }]
+  }
+{% endschema %}

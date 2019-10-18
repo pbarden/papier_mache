@@ -1,0 +1,66 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available when you add the "Image with text" section in the theme editor.
+
+  Theme Store required settings
+  - Image
+  - Heading: title of the block
+  - Text: description of the block
+
+  Theme Store optional settings
+  - Button label: label associated with the button
+  - Button link: link of the button
+{%- endcomment -%}
+
+<section class="image-with-text">
+
+  <div class="section section-image section-login lazyload" data-bgset="{{ section.settings.image | img_url: '1000x', format: 'pjpg' }}">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mx-auto">
+        <div class="card card-register" style="border-radius: 12px; opacity: 0.8; filter: alpha(opacity=80);">
+    {% if section.settings.title != blank %}<h3 class="title mx-auto">{{ section.settings.title | escape }}</h3>{% endif %}
+    {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+     </div>
+     <div class="col text-center">
+       {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+              <a href="{{ section.settings.button_link }}" class="btn btn-outline-neutral btn-round btn-lg" target="_blank">{{ section.settings.button_label | escape }}</a>
+	   {% endif %}
+     </div>
+   </div>
+  </div>
+ </div>
+</div>
+</section>
+
+{% schema %}
+  {
+    "name": "Image with text",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image with text"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image with text",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,36 @@
+  <div class="section-dark lazyload" data-bg="{{ section.settings.image | img_url: '1000x', crop: 'center', format: 'pjpg' }}">
+    <div class="filter"></div>
+    <div class="content-center">
+      <div class="container">
+        <div class="title-brand">
+          <h2 style="font-size: 5em !important; padding: 40px 0px 40px 0px !important;" class="presentation-title">{{ section.settings.title | escape }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% schema %}
+  {
+    "name": "Banner",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image with text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Banner",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}
